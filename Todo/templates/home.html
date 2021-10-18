@@ -1,0 +1,62 @@
+{% extends 'nav.html' %}
+
+{% block title %}To-Do List{% endblock %}
+
+{% block content %}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-success alert-dismissable" role="alert">
+        <button class="close" data-dismiss="alert">
+            <small><sup>x</sup></small>
+        </button>
+        {{message}}
+    </div>
+    {% endfor %}
+    {% endif %}
+
+    {% if all_item %}
+    <table class="table table-bordered">
+        {% for data in all_item %}
+        {% if data.complete %}
+        <tr class="table-secondary">
+            <td class="stricker"><a href="{% url 'edit' data.id %}">{{data.item}}</a></td>
+            <td>
+                <center><a href="{% url 'uncross' data.id %}">Uncross</a></center>
+            </td>
+            <td>
+                <center><a href="{% url 'delete' data.id %}">Delete</a></center>
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td><a href="{% url 'edit' data.id %}">{{data.item}}</a></td>
+            <td>
+                <center><a href="{% url 'cross_off' data.id %}">Cross off</a></center>
+            </td>
+            <td>
+                <center><a href="{% url 'delete' data.id %}">Delete</a></center>
+            </td>
+        </tr>
+        {% endif%}
+        {% endfor %}
+    </table>
+    {% endif %}
+</body>
+
+</html>
+
+{% endblock %}
