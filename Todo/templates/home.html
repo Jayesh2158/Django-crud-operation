@@ -34,6 +34,8 @@
         {% if data.complete %}
         <tr class="table-secondary">
             <td class="stricker"><a href="{% url 'edit' data.id %}">{{data.item}}</a></td>
+            <td>{{data.due_date}}</td>
+            <td>{{data.status}}</td>
             <td>
                 <center><a href="{% url 'uncross' data.id %}">Uncross</a></center>
             </td>
@@ -44,6 +46,8 @@
         {% else %}
         <tr>
             <td><a href="{% url 'edit' data.id %}">{{data.item}}</a></td>
+            <td>{{data.due_date}}</td>
+            <td>{{data.status}}</td>
             <td>
                 <center><a href="{% url 'cross_off' data.id %}">Cross off</a></center>
             </td>

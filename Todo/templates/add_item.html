@@ -1,0 +1,47 @@
+{% extends 'nav.html' %}
+
+{% block title %}To-Do List | Edit Item{% endblock %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Add Item!</h1>
+    <form class="mb-3" method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
+    
+        <label class="form-label">Task Title : </label><br>
+        <input class="form-control mr-sm-2" type="search" placeholder="Item Name" value="{{ item.item }}"
+            aria-label="Search" name="item">
+        {% if 'item' in errors%}
+        <h5 style="color : rgb(218, 14, 14)">Title Field is important</h5>
+        {% endif%}<br>
+        <label class="form-label">Status :</label><br>
+        <input class="form-control" type="search" placeholder="Status" aria-label="Search" name="status">
+        {% if 'status' in errors%}
+        <h5 style="color : rgb(218, 14, 14)">Status Field is important</h5>
+        {% endif%}<br>
+        <input type="hidden" value="{{ item.completed }}" name="completed">
+        <input type="hidden" value="{{ item.assign_date }}" name="assign_date">
+        <label for="due_date">Due Date : </label><br>
+        <input type="datetime-local" id="due_date" name="due_date"><br>
+        {% if 'due_date' in errors%}
+        <h5 style="color : rgb(218, 14, 14)">Due Date Field is important</h5>
+        {% endif%}
+        <br>
+        <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Add Item</button>
+    </form>
+</body>
+
+</html>
+{% endblock %}

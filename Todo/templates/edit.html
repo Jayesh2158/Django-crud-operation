@@ -3,15 +3,42 @@
 {% block title %}To-Do List | Edit Item{% endblock %}
 
 {% block content %}
-{% if item %}
 
-<form class="form-inline my-2 my-lg-0" method="POST">
+<!-- {% if messages %}
+{% for message in messages %}
+<div class="alert alert-success alert-dismissable" role="alert">
+    <button class="close" data-dismiss="alert">
+        <small><sup>x</sup></small>
+    </button>
+    {{message}}
+</div>
+{% endfor %}
+{% endif %} -->
+{% if item %}
+<form class="mb-3" method="POST">
     {% csrf_token %}
+    {{form.as_p}}
+
+    <label class="form-label">Task Title : </label><br>
     <input class="form-control mr-sm-2" type="search" placeholder="{{ item.item }}" value="{{ item.item }}"
         aria-label="Search" name="item">
-
+    {% if 'item' in errors%}
+    <h5 style="color : rgb(218, 14, 14)">Title Field is important</h5>
+    {% endif%}<br>
+    <label class="form-label">Status :</label><br>
+    <input class="form-control" type="search" placeholder="{{ item.status }}" value="{{ item.status }}"
+        aria-label="Search" name="status">
+    {% if 'status' in errors%}
+    <h5 style="color : rgb(218, 14, 14)">Status Field is important</h5>
+    {% endif%}<br>
     <input type="hidden" value="{{ item.completed }}" name="completed">
-
+    <input type="hidden" value="{{ item.assign_date }}" name="assign_date">
+    <label for="due_date">Due Date : </label><br>
+    <input type="datetime-local" id="due_date" value="{{item.due_date}}" name="due_date"><br>
+    {% if 'due_date' in errors%}
+    <h5 style="color : rgb(218, 14, 14)">Due Date Field is important</h5>
+    {% endif%}
+    <br>
     <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Edit Item</button>
 </form>
 

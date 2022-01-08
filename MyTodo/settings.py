@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Todo'
 ]
+AUTH_USER_MODEL = "Todo.User"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -52,6 +53,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'MyTodo.urls'
+
 
 TEMPLATES = [
     {
@@ -122,11 +124,25 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
 
-    os.path.join(BASE_DIR,'static'),
+    os.path.join(BASE_DIR, 'static'),
 
 ]
+
+MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'lakman9520@gmail.com'
+EMAIL_HOST_PASSWORD = 'gg44ggml'
+
+
+# AUTH_USER_MODEL='Todo.User'
+# LOGIN_URL='/login/'

@@ -1,0 +1,26 @@
+{% extends 'nav.html' %}
+
+{% block title %}To-Do List{% endblock %}
+
+{% block content %}
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-success alert-dismissable" role="alert">
+    <button class="close" data-dismiss="alert">
+        <small><sup>x</sup></small>
+    </button>
+    {{message}}
+</div>
+{% endfor %}
+{% endif %}
+<div class="container py-5">
+	<h1>Register</h1>
+	<form method="POST">
+		{% csrf_token %}
+		<div class="mb-3">{{ register_form}}</div>                    
+		<button class="btn btn-primary" type="submit">Register</button>
+	</form>
+	<p class="text-center">If you already have an account, <a href="/login">login</a> instead.</p>
+</div>
+
+{% endblock %}
